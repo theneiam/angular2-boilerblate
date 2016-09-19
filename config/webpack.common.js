@@ -21,20 +21,26 @@ module.exports = {
                 test: /\.ts$/,
                 loaders: ['awesome-typescript-loader', 'angular2-template-loader']
             },
-            { test: /\.html$/, loader: 'html' }
+            {
+                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+                loader: 'file?name=assets/[name].[hash].[ext]'
+            },
+            { test: /\.html$/, loader: 'html' },
+            { test: /\.less/, loaders: ['raw', 'less'] },
+            { test: /\.css/, loaders: ['style', 'css'] }
         ]
     },
 
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['app', 'polyfills', 'vendor']
+        }),
+
         new HtmlWebpackPlugin({
             template: 'dist/index.html',
             inject: true,
             hash: true,
             chunksSortMode: 'dependency'
-        }),
-
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['app', 'polyfills', 'vendor']
         })
     ]
 };
