@@ -1,15 +1,18 @@
 var webpack = require('webpack');
+var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        polyfills: './src/polyfills.ts',
         vendor: './src/vendor.ts',
+        polyfills: './src/polyfills.ts',
         app: './src/app/main.ts'
     },
 
     resolve: {
-        extensions: ['', '.js', '.ts']
+        root: path.join(__dirname, '../src'),
+        extensions: ['', '.js', '.ts'],
+        modulesDirectories: ['node_modules']
     },
 
     module: {
@@ -19,17 +22,19 @@ module.exports = {
                 loaders: ['awesome-typescript-loader', 'angular2-template-loader']
             },
             { test: /\.html$/, loader: 'html' }
-        ],
-        plugins: [
-            new HtmlWebpackPlugin({
-                template: './dist/index.html',
-                inject: true,
-                hash: true
-            }),
-
-            new webpack.optimize.CommonsChunkPlugin({
-                name: ['app', 'vendor', 'polyfills']
-            })
         ]
-    }
+    },
+
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'dist/index.html',
+            inject: true,
+            hash: true,
+            chunksSortMode: 'dependency'
+        }),
+
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['app', 'polyfills', 'vendor']
+        })
+    ]
 };

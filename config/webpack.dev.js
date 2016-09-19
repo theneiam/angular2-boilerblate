@@ -1,22 +1,20 @@
 var webpackMerge = require('webpack-merge');
+var path = require('path');
 var commonConfig = require('./webpack.common');
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
 
     output: {
-        path: './dist',
+        path: path.join(__dirname, '../dist'),
         publicPath: '/',
-        filename: '[name].js',
+        filename: '[name].bundle.js',
         chunkFilename: '[id].chunk.js'
     },
 
     devServer: {
         contentBase: './dist',
         historyApiFallback: true,
-        hot: true,
-        inline: true,
-        progress: true,
         colors: true,
         host: process.env.HOST || 'localhost',
         port: process.env.PORT || 3000,
