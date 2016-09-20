@@ -1,1 +1,10 @@
-<h1>Angular 2 Boiler Plate</h1>
+<nav>
+    <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/about">About</a></li>
+    </ul>
+</nav>
+<main>
+    <h1>{{ appName }}</h1>
+    <router-outlet></router-outlet>
+</main>

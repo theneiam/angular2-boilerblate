@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './app.template.html',
     styleUrls: ['./app.styles.less']
 })
-export class AppComponent {}
+export class AppComponent {
+    appName:string = 'ANGULAR 2 BOILERPLATE';
+}
