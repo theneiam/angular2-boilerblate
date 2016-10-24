@@ -6,7 +6,7 @@ module.exports = {
     entry: {
         vendor: './src/vendor.ts',
         polyfills: './src/polyfills.ts',
-        app: './src/app/main.ts'
+        app: './src/main.ts'
     },
 
     resolve: {
